@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - springlibrary@localhost" uuid="49f99ab0-d101-42cd-8ed0-cfca38abbc66">
+    <database-info product="MySQL" version="5.6.20" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="springlibrary"/>
+    <table name="author" schema="" catalog="springlibrary" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="fio" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
+      <column name="birthday" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_author" table="book" schema="" catalog="springlibrary" columns="author_id"/>
+    </table>
+    <table name="book" schema="" catalog="springlibrary" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="content" sqlType="LONGBLOB" precision="2147483647" scale="0" nullable="false" jdbcType="-4"/>
+      <column name="page_count" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="isbn" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="genre_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="author_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="publish_year" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="publisher_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="image" sqlType="LONGBLOB" precision="2147483647" scale="0" nullable="true" jdbcType="-4"/>
+      <column name="descr" sqlType="VARCHAR" precision="5000" scale="0" nullable="true" jdbcType="12"/>
+      <column name="rating" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="vote_count" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5" def="MA=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_author" columns="author_id" ref-table="author" ref-schema="" ref-catalog="springlibrary" ref-columns="id" update-rule="0" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_genre" columns="genre_id" ref-table="genre" ref-schema="" ref-catalog="springlibrary" ref-columns="id" update-rule="0" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_publisher" columns="publisher_id" ref-table="publisher" ref-schema="" ref-catalog="springlibrary" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_book_id" table="vote" schema="" catalog="springlibrary" columns="book_id"/>
+      <index name="id_UNIQUE" unique="true" columns="id"/>
+      <index name="isbn_UNIQUE" unique="true" columns="isbn"/>
+      <index name="fk_author_idx" unique="false" columns="author_id"/>
+      <index name="fk_genre_idx" unique="false" columns="genre_id"/>
+      <index name="fk_publiher_idx" unique="false" columns="publisher_id"/>
+    </table>
+    <table name="genre" schema="" catalog="springlibrary" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_genre" table="book" schema="" catalog="springlibrary" columns="genre_id"/>
+    </table>
+    <table name="publisher" schema="" catalog="springlibrary" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_publisher" table="book" schema="" catalog="springlibrary" columns="publisher_id"/>
+    </table>
+    <table name="vote" schema="" catalog="springlibrary" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="value" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" def="MA=="/>
+      <column name="book_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="username" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_book_id" columns="book_id" ref-table="book" ref-schema="" ref-catalog="springlibrary" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
+      <index name="id_UNIQUE" unique="true" columns="id"/>
+      <index name="fk_book_id_idx" unique="false" columns="book_id"/>
+      <index name="fk_user_id_idx" unique="false" columns="username"/>
+    </table>
+  </data-source>
+  <data-source name="MySQL - ostastore@localhost" uuid="96147108-049d-4757-acbb-f4777b598c90">
+    <database-info product="MySQL" version="5.6.20" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="ostastore"/>
+    <table name="company" schema="" catalog="ostastore" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_companyId" table="goods" schema="" catalog="ostastore" columns="company_id"/>
+    </table>
+    <table name="goods" schema="" catalog="ostastore" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="kind_id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="year" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="price" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="company_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="descr" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="image" sqlType="LONGBLOB" precision="2147483647" scale="0" nullable="true" jdbcType="-4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_companyId" columns="company_id" ref-table="company" ref-schema="" ref-catalog="ostastore" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="fk_kindId" columns="kind_id" ref-table="kinds" ref-schema="" ref-catalog="ostastore" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="fk_goodsId" table="reservation" schema="" catalog="ostastore" columns="goods_id"/>
+      <index name="fk_companyId_idx" unique="false" columns="company_id"/>
+      <index name="fk_kindId_idx" unique="false" columns="kind_id"/>
+    </table>
+    <table name="group_authorities" schema="" catalog="ostastore" type="TABLE">
+      <column name="group_id" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
+      <column name="authority" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <foreign-key name="group_authorities_ibfk_1" columns="group_id" ref-table="groups" ref-schema="" ref-catalog="ostastore" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="group_members" schema="" catalog="ostastore" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="username" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="group_id" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="group_members_ibfk_1" columns="group_id" ref-table="groups" ref-schema="" ref-catalog="ostastore" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="groups" schema="" catalog="ostastore" type="TABLE">
+      <column name="id" sqlType="BIGINT UNSIGNED" precision="20" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="group_name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="group_authorities_ibfk_1" table="group_authorities" schema="" catalog="ostastore" columns="group_id"/>
+      <exported-key name="group_members_ibfk_1" table="group_members" schema="" catalog="ostastore" columns="group_id"/>
+    </table>
+    <table name="kinds" schema="" catalog="ostastore" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="fk_kindId" table="goods" schema="" catalog="ostastore" columns="kind_id"/>
+    </table>
+    <table name="persistent_logins" schema="" catalog="ostastore" type="TABLE">
+      <column name="username" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="series" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="token" sqlType="VARCHAR" precision="64" scale="0" nullable="false" jdbcType="12"/>
+      <column name="last_used" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <primary-key name="PRIMARY" columns="series"/>
+    </table>
+    <table name="reservation" schema="" catalog="ostastore" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="lastname" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="midllename" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="newpost" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
+      <column name="goods_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="fk_goodsId" columns="goods_id" ref-table="goods" ref-schema="" ref-catalog="ostastore" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_goodsId_idx" unique="false" columns="goods_id"/>
+    </table>
+    <table name="users" schema="" catalog="ostastore" type="TABLE">
+      <column name="username" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="enabled" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MQ=="/>
+      <primary-key name="PRIMARY" columns="username"/>
+    </table>
+  </data-source>
+</component>

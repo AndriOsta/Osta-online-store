@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="ua.andriosta.projects.ostastore.entites.Goods" table="goods" schema="" catalog="ostastore">
+        <id name="id">
+            <column name="id" sql-type="bigint" not-null="true"/>
+        </id>
+        <property name="year">
+            <column name="year" sql-type="int" not-null="true"/>
+        </property>
+        <property name="price">
+            <column name="price" sql-type="varchar" length="45" not-null="true"/>
+        </property>
+        <property name="descr">
+            <column name="descr" sql-type="text" length="65535" not-null="true"/>
+        </property>
+        <property name="name">
+            <column name="name" sql-type="varchar" length="45" not-null="true"/>
+        </property>
+        <property name="image">
+            <column name="image" sql-type="longblob"/>
+        </property>
+        <many-to-one name="company" class="ua.andriosta.projects.ostastore.entites.Company">
+            <column name="company_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="kind" class="ua.andriosta.projects.ostastore.entites.Kind">
+            <column name="kind_id" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

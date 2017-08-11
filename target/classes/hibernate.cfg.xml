@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/ostastore</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.enable_lazy_load_no_trans">true</property>
+        <property name="hibernate.jdbc.use_get_generated_keys">true</property>
+        <mapping resource="ua.andriosta.projects.entites.mapping/Company.hbm.xml"/>
+        <mapping resource="ua.andriosta.projects.entites.mapping/Goods.hbm.xml"/>
+        <mapping resource="ua.andriosta.projects.entites.mapping/Kinds.hbm.xml"/>
+        <mapping resource="ua.andriosta.projects.entites.mapping/Reservation.hbm.xml"/>
+
+        <mapping resource="ua.andriosta.projects.entites.mapping/GroupMembers.hbm.xml"/>
+        <mapping resource="ua.andriosta.projects.entites.mapping/Groups.hbm.xml"/>
+        <mapping resource="ua.andriosta.projects.entites.mapping/Users.hbm.xml"/>
+
+
+    </session-factory>
+</hibernate-configuration>	

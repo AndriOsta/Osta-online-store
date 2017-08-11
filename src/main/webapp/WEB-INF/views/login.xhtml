@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+
+        >
+<f:view>
+    <h:head>
+        <title>#{msg.welcome_title}</title>
+
+    </h:head>
+    <h:body>
+
+
+        <f:facet name="last">
+            <h:outputStylesheet library="css" name="authorization.css"/>
+            <h:outputScript library="js" name="library.js" target="head"/>
+        </f:facet>
+
+
+
+        <p:lightBox id="lighbox2">
+            <h:outputLink value="#">
+                <h:outputText value="Watch video" />
+            </h:outputLink>
+
+            <f:facet name="inline">
+                <p:media value="http://vimeo.com/moogaloop.swf?clip_id=87780794"  width="400" height="225" player="flash" />
+            </f:facet>
+        </p:lightBox>
+
+
+
+        <div class="authorization">
+
+            <h:panelGroup layout="block" styleClass="lg" id="divLogo">
+                <h:graphicImage library="images/ru" name="logo.png"/>
+            </h:panelGroup>
+
+
+            <ui:include src="/WEB-INF/templates/locales.xhtml"/>
+
+            <div class="clear"/>
+
+
+            <form class="login_form" id="formLogin" action="#{request.contextPath}/app/checkuser" method='POST'>
+
+                <p:inputText id="username" value="#{user.username}" required="true" styleClass="aut-text" alt="username"/>
+
+                <p:password id="password" value="#{user.password}" redisplay="true" required="true"
+                    alt="password"        styleClass="aut-text"/>
+
+
+                <c:if test="${not empty param.login_failed}">
+                    <div class="error">
+                        Login failed
+                    </div>
+                </c:if>
+
+
+                <div class="div-login-button">
+                    <p:panelGrid columns="3" columnClasses="col, col, col" styleClass="panel-login">
+                        <h:form>
+                            <a href="${request.contextPath}/app/regist">regist</a>
+                        </h:form>
+                        <p:commandButton id="btnLogin" value="Login" type="submit" styleClass="login_button"/>
+                    </p:panelGrid>
+
+                </div>
+
+
+
+            </form>
+
+            <p:dialog header="Regist form" widgetVar="dlg1" showEffect="explode" hideEffect="bounce" height="220" width="200">
+
+                <h:form>
+                    <strong>username</strong> <h:inputText id="username1" value="#{insertCriteria.username}" />
+                    <strong>password</strong> <h:inputText id="password1" value="#{insertCriteria.password}"  />
+
+                    <p:commandButton  id="addUserButton" value="create"  action="createNewUser"  ajax="false"/>
+                </h:form>
+            </p:dialog>
+        </div>
+
+
+    </h:body>
+
+
+</f:view>
+</html>
+

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:sec="http://www.springframework.org/security/tags"
+        >
+
+<ui:composition template="/WEB-INF/templates/store.xhtml">
+
+    <ui:define name="title">
+        #{msg.book_list}
+    </ui:define>
+>
+    <ui:define name="content">
+        <div class="box-sh">
+
+            <h1><p:outputLabel id="booksCount" value="#{msg.book_count}:  #{goodsFacade.goods.size()}" /></h1>
+
+
+
+            <h:form id="add-action" >
+                <p:commandLink >
+                    <h:outputText value="#{msg.add_book}" title="#{msg.add_book}"/>
+                </p:commandLink>
+            </h:form>
+
+
+        </div>
+
+
+        <h:form id="booksForm">
+
+
+            <p:dataGrid rowIndexVar="rowIndex" columns="2" lazy="true" var="g" value="${goodsFacade.goods}"
+                        id="booksList" styleClass="books_list" paginator="true" rows="4" paginatorPosition="bottom"
+                        rowsPerPageTemplate="4,10,20" paginatorTemplate="{RowsPerPageDropdown} {PageLinks}"
+                        paginatorAlwaysVisible="true" emptyMessage="">
+
+
+                <div class="item">
+
+                    <div class="image-info">
+
+                        <h:outputLink styleClass="content_link" target="_blank">
+                            <p:graphicImage value="/ShowImage?index=#{rowIndex}" width="130" height="150"/>
+                        </h:outputLink>
+
+
+                        <p:panelGrid id="ratingPanel" columns="2">
+
+
+
+                        </p:panelGrid>
+
+                    </div>
+
+
+                    <div class="info">
+                        <div class="book_name">
+                            <h:outputLink id="bookName" styleClass="title" target="_blank">
+                                #{g.name}
+                            </h:outputLink>
+
+                        </div>
+                        <span>#{g.price}</span>
+
+
+
+                        <p><strong>#{msg.publish_year}</strong> #{g.year}</p>
+
+                        <p><strong>#{msg.company_name}</strong> #{g.company.name}</p>
+                        <p><strong>#{msg.company_name}</strong> #{g.company.name}</p>
+                        <p><strong>#{msg.company_name}</strong> #{g.company.name}</p>
+
+
+
+                    </div>
+
+
+                    <p:commandLink styleClass="mr" type="button" onclick="dlg2.show()">
+                        <p class="download">#{msg.descr}</p>
+                        <p:ajax update=":booksForm"/>
+                    </p:commandLink>
+
+                    <p:commandLink styleClass="mr" type="button" onclick="dlg3.show()">
+                        <p class="download">#{msg.order}</p>
+                        <f:param name="id" value="#{g.id}"/>
+
+                    </p:commandLink>
+
+
+
+
+
+
+
+
+                    <p:dialog header="Description form" widgetVar="dlg2" showEffect="explode" hideEffect="bounce" height="220" width="200" styleClass="edit_book_table">
+                         <p:outputPanel>
+                             #{g.descr}
+                         </p:outputPanel>
+                      </p:dialog>
+                    <p:dialog header="Reservation form" widgetVar="dlg3" showEffect="explode" hideEffect="bounce" height="220" width="200">
+
+
+                        <strong>First name</strong> <h:inputText id="firstName" value="#{insertCriteria.firstName}" />
+                        <strong>Last name</strong> <h:inputText id="lastName" value="#{insertCriteria.lastName}"  />
+                        <strong>Middle name</strong><h:inputText id="midlleName" value="#{insertCriteria.midlleName}"  />
+                        <strong>NewPost adress</strong><h:inputText id="newPost" value="#{insertCriteria.newPost}"   />
+                            <p:commandButton  id="insertButton" value="order"   action="insertInfo" actionListener="#{insertCriteria.setGoods_id(g.id)}" ajax="false"/>
+
+                    </p:dialog>
+
+
+                    <p:dialog header="Updating form" widgetVar="dlg4" showEffect="explode" hideEffect="bounce" height="220" width="200">
+
+
+                        <strong>"#{g.name}"</strong> <h:inputText id="name" value="#{updateCriteria.name}" />
+                        <strong>"#{g.price}"</strong> <h:inputText id="price" value="#{updateCriteria.price}"  />
+                        <strong>"#{g.year}"</strong><h:inputText id="year" value="#{updateCriteria.year}"  />
+                        <p:commandButton  id="updateButton" value="update"   action="updateGoods" actionListener="#{updateCriteria.setId(g.id)}" ajax="false"/>
+
+                    </p:dialog>
+                    <p:dialog header="delete menu" widgetVar="dlg5" showEffect="explode" hideEffect="false" height="100" width="200">
+                        <p:outputLabel>Are you sure?</p:outputLabel><br/>
+                        <p:commandButton value="delete" id="delete" action="deleteGoods" actionListener="#{insertCriteria.setGoods_id(g.id)}"/>
+                      <p:commandButton value="cancel"  id ="cancel" onclick="dlg5.close()"/>
+                    </p:dialog>
+
+
+                    <p:commandLink styleClass="mr"  title="#{msg.edit_goods}" type="button"  onclick="dlg4.show()"   >
+                        <p class="edit">#{msg.edit}</p>
+                    </p:commandLink>
+
+                    <p:commandLink styleClass="delete-button" title="#{msg.delete_goods}" type="button"  onclick="dlg5.show()" >
+                        <p class="delete">#{msg.delete}</p>
+                    </p:commandLink>
+
+
+                </div>
+
+
+            </p:dataGrid>
+
+
+        </h:form>
+
+
+    </ui:define>
+
+
+
+
+
+
+
+
+
+
+</ui:composition>
+
+</html>
